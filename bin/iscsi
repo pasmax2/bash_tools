@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#iscsiadm -m discovery -t st -p 10.0.2.30
+
+
+case $1 in
+add)
+        iscsiadm -m node --targetname $2 --portal 10.0.222.60:3260 --login
+;;
+logout)
+        iscsiadm --mode node --targetname $2 --portal 10.0.222.60:3260 --logout
+        iscsiadm --mode node
+;;
+del)
+        iscsiadm -m discovery --portal "$2" --op=delete
+;;
+search)
+        echo "Recherche sur le réseau"
+        iscsiadm -m discovery -t st -p 10.0.2.30
+;;
+*)
+        echo "USAGE : $0 [search/add/logout/del] arg"
+        echo "Recherche les connection déja établis"
+        iscsiadm -m discovery
+;;
+esac
