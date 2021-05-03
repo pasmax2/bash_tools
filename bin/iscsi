@@ -18,8 +18,11 @@ search)
         echo "Recherche sur le réseau"
         iscsiadm -m discovery -t st -p 10.0.2.30
 ;;
+show)
+        tail /etc/iscsi/initiatorname.iscsi
+;;
 *)
-        echo "USAGE : $0 [search/add/logout/del] arg"
+        echo "USAGE : $0 [show/search/add/logout/del] arg"
         echo "Recherche les connection déja établis"
         iscsiadm -m discovery
 ;;
